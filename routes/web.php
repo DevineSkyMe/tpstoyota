@@ -159,6 +159,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin')->group(function () {
         Route::post('/reports/workshop/{workshop}/generate', [ReportController::class, 'generate'])->name('reports.workshop.generate');
         Route::post('/reports/workshop/{workshop}/send', [ReportController::class, 'send'])->name('reports.workshop.send');
+        Route::post('/reports/activity/send', [ReportController::class, 'sendActivity'])->name('reports.activity.send');
     });
 
     // 9. Internal messaging / report inbox.

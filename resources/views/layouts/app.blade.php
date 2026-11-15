@@ -32,13 +32,11 @@
     </script>
 
     <style>
-        html, body {
+        html {
             height: 100%;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
         }
         body {
+            min-height: 100%;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
         /* Custom scrollbar */
@@ -56,24 +54,72 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
+
+        /* ------------------------------------------------------------- */
+        /* Print Stylesheet: Bersih, Tanpa Navbar, Elegan, Nyaman Dibaca */
+        /* ------------------------------------------------------------- */
+        @media print {
+            html, body {
+                height: auto !important;
+                min-height: 0 !important;
+                overflow: visible !important;
+                background-color: #ffffff !important;
+                color: #0f172a !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Sembunyikan semua elemen navigasi dan tombol saat cetak */
+            #portal-sidebar,
+            header,
+            footer,
+            nav,
+            .no-print {
+                display: none !important;
+            }
+
+            .min-h-full,
+            .flex-row,
+            .flex-col,
+            .flex-1 {
+                display: block !important;
+                width: 100% !important;
+                min-height: 0 !important;
+                height: auto !important;
+            }
+
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: visible !important;
+                height: auto !important;
+                width: 100% !important;
+            }
+        }
     </style>
     @include('partials.theme')
 </head>
 <body class="h-full bg-[#f4f7fc] text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+<body class="h-full overflow-hidden bg-[#f4f7fc] text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
 
-    <div class="min-h-full flex flex-row">
+    <div class="flex h-screen overflow-hidden">
+    <div class="flex h-full w-full overflow-hidden">
 
         <!-- Sidebar Component -->
         @include('partials.sidebar')
 
         <!-- Main Content Area Wrapper -->
-        <div class="flex-1 flex flex-col min-w-0">
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <div class="flex-1 flex flex-col h-full min-w-0 min-h-0 overflow-hidden">
 
             <!-- Navbar Component -->
             @include('partials.navbar')
 
-            <!-- Main Content -->
-            <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6">
+            <!-- Main Scrollable Content -->
+            <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 space-y-6">
+            <main class="flex-1 overflow-y-auto min-h-0 p-4 md:p-6 lg:p-8 space-y-6">
                 @include('partials.flash')
 
                 @yield('content')

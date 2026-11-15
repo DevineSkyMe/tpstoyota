@@ -1,0 +1,2 @@
+@include('activity.partials.kpis')
+

@@ -1,0 +1,2 @@
+@include('partials.metrics-bar')
+
